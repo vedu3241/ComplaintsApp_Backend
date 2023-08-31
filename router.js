@@ -11,4 +11,5 @@ router.post("/login", authController().login);
 
 //report routes
 router.post("/submitReport", reportController().submitReport);
+router.post("/getReports", reportController().getReports);
 module.exports = router;

@@ -18,10 +18,6 @@ function reportsController() {
       }
       console.log("passed file check!");
       // // Process the file upload
-      // const uploadedImage = req.files.reportImg;
-      // // console.log(uploadedImage);
-      // const imageName = uploadedImage.name;
-      // const filePath = __dirname + "/uploads/" + uploadedImage.name;
 
       //multiple images
       const uploadedImages = req.files.reportImages;
@@ -68,43 +64,11 @@ function reportsController() {
           }
         });
       });
-
-      // Moving file to uploades
-      // uploadedImage.mv(filePath, (err) => {
-      //   if (err) {
-      //     res.status(500).send(err);
-      //   }
-      //   // File upload successful, proceed to save the report
-
-      //   const complaint = new Complaint({
-      //     reporterId: ReporterId,
-      //     Category: Category,
-      //     Latitude: Latitude,
-      //     Longitude: Longitude,
-      //     Address: Address,
-      //     Image: imageName,
-      //   });
-
-      //   complaint
-      //     .save()
-      //     .then(() => {
-      //       return res
-      //         .status(201)
-      //         .json({ message: "Complaint submitted successfully" });
-      //     })
-      //     .catch((err) => {
-      //       console.log(`Error saving complaint: ${err}`);
-      //       return res.status(500).json({
-      //         message: "An error occurred while saving the complaint",
-      //       });
-      //     });
-      // });
     },
     async getReports(req, res) {
       const { userId } = req.body;
       data = await Complaint.find({ reporterId: userId });
       if (data) {
-        // console.log(data[1].Images.length);
         res.status(200).json({ reports: data });
       } else {
         console.log("No reports found");

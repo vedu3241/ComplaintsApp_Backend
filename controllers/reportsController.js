@@ -20,7 +20,9 @@ function reportsController() {
       // // Process the file upload
 
       //multiple images
-      const uploadedImages = req.files.reportImages;
+      const uploadedImages = Array.isArray(req.files.reportImages)
+        ? req.files.reportImages
+        : [req.files.reportImages];
       const imageNames = [];
       let completedUploads = 0; // Counter for completed uploads
 

@@ -8,9 +8,11 @@ const router = require("./router");
 const fileUpload = require("express-fileupload");
 
 // Database connection
-
+// "mongodb://127.0.0.1:27017/ComplaintDB" old
+let uri =
+  "mongodb+srv://ved:test123@cluster0.1goshc7.mongodb.net/?retryWrites=true&w=majority";
 mongoose
-  .connect("mongodb://127.0.0.1:27017/ComplaintDB", {
+  .connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })

@@ -4,17 +4,33 @@ const Complaint = require("../models/complaints");
 function reportsController() {
   return {
     submitReport(req, res) {
-      const { ReporterId, Category, Latitude, Longitude, Address } = req.body;
+      const {
+        ReporterId,
+        Category,
+        Latitude,
+        Longitude,
+        Address,
+        Description,
+      } = req.body;
 
       // Check if any field is empty
-      if (!ReporterId || !Category || !Latitude || !Longitude || !Address) {
-        return res.status(422).json({ message: "Fields cannot be empty" });
+      if (
+        !ReporterId ||
+        !Category ||
+        !Latitude ||
+        !Longitude ||
+        !Address ||
+        !Description
+      ) {
+        return res
+          .status(422)
+          .json({ message: "Error1: Fields cannot be empty" });
       }
 
       // Check if a file is uploaded
       //reportImg for single
       if (!req.files || !req.files.reportImages) {
-        return res.status(400).send("No file uploaded.");
+        return res.status(400).send("Error2: No file uploaded.");
       }
       console.log("passed file check!");
       // // Process the file upload
@@ -31,7 +47,7 @@ function reportsController() {
         const imageName = uploadedImage.name;
         imageNames.push(imageName);
 
-        // Moving file to uploads
+        // Moving file to uploads folder which is under controllers folder
         uploadedImage.mv(filePath, (err) => {
           if (err) {
             console.log(err);
@@ -47,9 +63,10 @@ function reportsController() {
               Latitude: Latitude,
               Longitude: Longitude,
               Address: Address,
+              Description: Description,
               Images: imageNames,
             });
-
+            // console.log(complaint);
             complaint
               .save()
               .then(() => {
@@ -70,7 +87,9 @@ function reportsController() {
     async getReports(req, res) {
       const { userId } = req.body;
       data = await Complaint.find({ reporterId: userId });
-      if (data) {
+      if (data && data.length > 0) {
+        data.reverse();
+
         res.status(200).json({ reports: data });
       } else {
         console.log("No reports found");

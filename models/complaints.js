@@ -12,6 +12,7 @@ const complaintsSchema = new Schema(
     Longitude: String,
     Address: String,
     Images: [String],
+    Description: String,
     Status: { type: String, default: "pending" },
     Attachment: { type: String, default: "0" },
   },

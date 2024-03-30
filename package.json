@@ -3,20 +3,34 @@
     "aws-sdk": "^2.1462.0",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
+    "ejs": "^3.1.9",
     "express": "^4.18.2",
+    "express-ejs-layouts": "^2.5.1",
     "express-fileupload": "^1.4.0",
     "init": "^0.1.2",
     "mongoose": "^7.4.3",
-    "nodemon": "^3.0.1"
+    "nodemon": "^3.0.1",
+    "path": "^0.12.7"
   },
   "scripts": {
     "start": "nodemon server.js",
-    "serve": "node server.js"
+    "serve": "node server.js",
+    "watch": "mix watch",
+    "watch-poll": "mix watch -- --watch-options-poll=1000",
+    "hot": "mix watch --hot",
+    "prod": "npm run production",
+    "production": "mix --production"
   },
   "name": "backend",
   "version": "1.0.0",
   "main": "router.js",
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "laravel-mix": "^6.0.49",
+    "resolve-url-loader": "^5.0.0",
+    "sass": "^1.69.5",
+    "sass-loader": "^12.1.0"
+  }
 }

@@ -38,6 +38,10 @@ function authController() {
         res.status(401).json({ message: "Login failed" });
       }
     },
+
+    demo(req, res) {
+      res.render("home");
+    },
   };
 }
 
